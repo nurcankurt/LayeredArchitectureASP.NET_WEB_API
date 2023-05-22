@@ -7,7 +7,7 @@ namespace MyProject.WebApi.Controllers
     [ApiController]
     public class PersonController : ControllerBase
     {
-        private BusinessLogicLayer.PersonService _service;
+        private readonly BusinessLogicLayer.PersonService _service;
         public PersonController(BusinessLogicLayer.PersonService service) 
         { 
             _service = service;

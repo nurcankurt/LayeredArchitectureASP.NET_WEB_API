@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using MyProject.BusinessLogicLayer;
 using MyProject.DataAccessLayer;
+using MyProject.DataAccessLayer.MyProject.DataAccessLayer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<PersonDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("sqlConnection")));
+builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+builder.Services.AddScoped<IPersonService, PersonService>();
 
 var app = builder.Build();
 
