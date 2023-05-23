@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MyProject.BusinessLogicLayer;
 
 namespace MyProject.WebApi.Controllers
 {
@@ -7,8 +8,8 @@ namespace MyProject.WebApi.Controllers
     [ApiController]
     public class PersonController : ControllerBase
     {
-        private readonly BusinessLogicLayer.PersonService _service;
-        public PersonController(BusinessLogicLayer.PersonService service) 
+        private readonly IPersonService _service;
+        public PersonController(IPersonService service) 
         { 
             _service = service;
         }

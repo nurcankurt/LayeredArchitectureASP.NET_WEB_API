@@ -1,13 +1,13 @@
 ﻿using MyProject.DataAccessLayer.Models;
-using MyProject.DataAccessLayer.MyProject.DataAccessLayer;
+using MyProject.DataAccessLayer;
 
 
 namespace MyProject.BusinessLogicLayer
 {
     public class PersonService : IPersonService
     {
-        private PersonRepository _personRepository;
-        public PersonService(PersonRepository personRepository) 
+        private IPersonRepository _personRepository;
+        public PersonService(IPersonRepository personRepository) 
         {
             _personRepository = personRepository;  
 

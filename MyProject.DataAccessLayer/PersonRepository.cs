@@ -4,8 +4,6 @@
     using System.Linq;
     using global::MyProject.DataAccessLayer.Models;
 
-    namespace MyProject.DataAccessLayer
-    {
         public class PersonRepository : IPersonRepository
         {
             protected readonly PersonDbContext _context;
@@ -47,4 +45,3 @@
     }
          
 
-}
