@@ -10,7 +10,7 @@ using MyProject.DataAccessLayer;
 namespace MyProject.WebApi.Migrations
 {
     [DbContext(typeof(PersonDbContext))]
-    [Migration("20230523133725_Initial")]
+    [Migration("20230706164406_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
