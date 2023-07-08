@@ -33,7 +33,7 @@ namespace MyProject.WebApi.Controllers
         {
             try
             {
-                var person = _service.GetPerson(id);
+                var person = _service.GetPersonById(id);
 
 
                 if (person is null)
@@ -72,7 +72,7 @@ namespace MyProject.WebApi.Controllers
             try
             {
                 
-                var entity = _service.GetPerson(id);
+                var entity = _service.GetPersonById(id);
 
                 if (entity is null)
                     return NotFound(); // 404
@@ -94,7 +94,7 @@ namespace MyProject.WebApi.Controllers
         {
             try
             {
-                var entity = _service.GetPerson(id);
+                var entity = _service.GetPersonById(id);
 
                 if (entity is null)
                     return NotFound(new

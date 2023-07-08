@@ -30,6 +30,10 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.MapGet("/people", async (IPersonService service) => await service.GetAllPeople());
+
+IResult
+
 app.MapControllers();
 
 app.Run();
