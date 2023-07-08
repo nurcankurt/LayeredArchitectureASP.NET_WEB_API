@@ -15,7 +15,7 @@ builder.Services.AddDbContext<PersonDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("sqlConnection"),
     x => x.MigrationsAssembly("MyProject.WebApi")));
 builder.Services.AddScoped<IPersonService, PersonService>();
-builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+
 
 var app = builder.Build();
 
@@ -29,10 +29,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
-app.MapGet("/people", async (IPersonService service) => await service.GetAllPeople());
-
-IResult
 
 app.MapControllers();
 

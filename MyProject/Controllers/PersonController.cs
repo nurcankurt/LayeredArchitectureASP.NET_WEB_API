@@ -70,8 +70,7 @@ namespace MyProject.WebApi.Controllers
             [FromBody] DataAccessLayer.Models.Person person)
         {
             try
-            {
-                
+            {  
                 var entity = _service.GetPersonById(id);
 
                 if (entity is null)
@@ -97,13 +96,16 @@ namespace MyProject.WebApi.Controllers
                 var entity = _service.GetPersonById(id);
 
                 if (entity is null)
+                {
                     return NotFound(new
                     {
                         statusCode = 404,
                         message = $"Person with id:{id} could not found."
                     });  // 404
 
-                _service.DeletePerson(entity);
+                }
+ 
+                _service.DeletePerson(id);
 
                 return NoContent();
             }
