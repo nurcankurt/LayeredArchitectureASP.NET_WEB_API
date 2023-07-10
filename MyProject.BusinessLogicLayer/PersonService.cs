@@ -41,7 +41,7 @@ namespace MyProject.BusinessLogicLayer
                 await _dbContext.SaveChangesAsync();
             }
         }
-        public async void DeletePerson(int id)
+        public async Task DeletePerson(int id)
         {
             var dbPerson = await _dbContext.People.FindAsync(id);
             if (dbPerson != null)

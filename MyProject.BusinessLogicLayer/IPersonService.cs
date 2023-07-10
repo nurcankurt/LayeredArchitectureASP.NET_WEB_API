@@ -14,7 +14,7 @@ namespace MyProject.BusinessLogicLayer
         Task<Person?> GetPersonById(int id);
         Task UpdatePerson(int id, Person person);
         Task CreatePerson(Person person);
-        void DeletePerson(int id);
+        Task DeletePerson(int id);
 
         
         
