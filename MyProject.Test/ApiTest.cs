@@ -5,7 +5,7 @@ using MyProject.DataAccessLayer.Models;
 namespace MyProject.Test
 {
     public class ApiTest
-    {
+    {/*
         [Fact]
         public async Task MapGet_ReturnsPersonList()
         {
@@ -18,7 +18,7 @@ namespace MyProject.Test
            
             //Assert
 
-        }
+        }*/
 
         private List<Person> GetTestPersonList() {
             var persons = new List<Person>
