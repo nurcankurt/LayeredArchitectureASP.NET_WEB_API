@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Moq;
 using MyProject.BusinessLogicLayer;
@@ -30,9 +33,6 @@ namespace MyProject.Test
         public async Task MapGet_ReturnsPersonList()
         {
             //Arrange
-            await using var application = new WebApplicationFactory<Program>();
-            using var client = application.CreateClient();
-
             var personServiceMock = new Mock<IPersonService>();
             var expectedPeople = new List<Person> {
             new Person
@@ -52,30 +52,82 @@ namespace MyProject.Test
             };
             personServiceMock.Setup(service => service.GetAllPeople()).ReturnsAsync(expectedPeople);
 
+            using var application = new WebApplicationFactory<Program>()
+                .WithWebHostBuilder(builder =>
+                {
+                    builder.ConfigureTestServices(services =>
+                    {
+                        // Replace the registered IPersonService with the mocked instance
+                        services.RemoveAll<IPersonService>();
+                        services.AddScoped<IPersonService>(_ => personServiceMock.Object);
+                    });
+                });
+            using var client = application.CreateClient();
+
             // Act
             var response = await client.GetAsync("/api/people");
             var result = await response.Content.ReadAsStringAsync();
 
             // Assert
+            response.EnsureSuccessStatusCode();
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
+
+        [Fact]
+        public async Task MapGet_WithExistingId_ReturnsPerson()
+        {
+            //Arrange
+            var personServiceMock = new Mock<IPersonService>();
+            var person = new Person
+            {
+                FirstName = "Nurcan",
+                LastName = "Kurt",
+                Email = "nurcan.kurt@test.com"
+            };
+
+            personServiceMock.Setup(service => service.GetPersonById(1)).ReturnsAsync(person);
+
+            using var application = new WebApplicationFactory<Program>()
+                .WithWebHostBuilder(builder =>
+                {
+                    builder.ConfigureTestServices(services =>
+                    {
+                        // Replace the registered IPersonService with the mocked instance
+                        services.RemoveAll<IPersonService>();
+                        services.AddScoped<IPersonService>(_ => personServiceMock.Object);
+                    });
+                });
+            using var client = application.CreateClient();
+
+            // Act
+            var response = await client.GetAsync("/api/people");
+            var result = await response.Content.ReadAsStringAsync();
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
 
 
         [Fact]
         public async Task MapPostTest()
         {
             await using var application = new WebApplicationFactory<Program>();
-
-
             var client = application.CreateClient();
 
-            var result = await client.PostAsJsonAsync("/api/people", new Person
+            var person = new Person
             {
                 FirstName = "Nurcan",
                 LastName = "Kurt",
                 Email = "nurcan.kurt@test.com"
-            });
+            };
 
+            // Act
+            var result = await client.PostAsJsonAsync("/api/people", person);
+
+            // Assert
+            result.EnsureSuccessStatusCode();
             Assert.Equal(HttpStatusCode.Created, result.StatusCode);
         }
 
