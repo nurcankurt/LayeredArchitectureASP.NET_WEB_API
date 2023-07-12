@@ -92,7 +92,6 @@ namespace MyProject.Test
                 {
                     builder.ConfigureTestServices(services =>
                     {
-                        // Replace the registered IPersonService with the mocked instance
                         services.RemoveAll<IPersonService>();
                         services.AddScoped<IPersonService>(_ => personServiceMock.Object);
                     });
@@ -113,7 +112,16 @@ namespace MyProject.Test
         [Fact]
         public async Task MapPostTest()
         {
-            await using var application = new WebApplicationFactory<Program>();
+            var personServiceMock = new Mock<IPersonService>();
+            using var application = new WebApplicationFactory<Program>()
+            .WithWebHostBuilder(builder =>
+            {
+                builder.ConfigureTestServices(services =>
+                {
+                    services.RemoveAll<IPersonService>();
+                    services.AddScoped<IPersonService>(_ => personServiceMock.Object);
+                });
+            });
             var client = application.CreateClient();
 
             var person = new Person
@@ -130,6 +138,7 @@ namespace MyProject.Test
             result.EnsureSuccessStatusCode();
             Assert.Equal(HttpStatusCode.Created, result.StatusCode);
         }
+
 
     }
 }
