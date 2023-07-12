@@ -6,6 +6,7 @@ namespace MyProject.WebApi
     {
         public static void Map(WebApplication app)
         {
+            app.MapGet("/", () => "Hello World!");
 
             app.MapGet("/api/people", async (IPersonService service) =>
             {
