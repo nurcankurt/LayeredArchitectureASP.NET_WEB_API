@@ -130,13 +130,6 @@ namespace MyProject.Test
             });
             var client = application.CreateClient();
 
-            var person = new Person
-            {
-                FirstName = "Nurcan",
-                LastName = "Kurt",
-                Email = "nurcan.kurt@test.com"
-            };
-
             // Act
             var result = await client.PostAsJsonAsync("/api/people", (Person)null);
 
