@@ -1,17 +1,10 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Moq;
 using MyProject.BusinessLogicLayer;
 using MyProject.DataAccessLayer.Models;
-using MyProject.WebApi;
 using System.Net;
 using System.Net.Http.Json;
 
@@ -30,14 +23,14 @@ namespace MyProject.Test
                         Id = 1,
                         FirstName = "Nurcan",
                         LastName = "Kurt",
-                        Email = "nkurt430"
+                        Email = "nurcan.kurt@test.com"
                     },
                     new Person
                     {
                         Id = 2,
-                        FirstName = "Test",
-                        LastName = "Test",
-                        Email = "Test"
+                        FirstName = "TestName",
+                        LastName = "TestLastName",
+                        Email = "exampe@test.com"
                     }
             };
             personServiceMock.Setup(service => service.GetAllPeople()).ReturnsAsync(expectedPeople);
@@ -56,7 +49,6 @@ namespace MyProject.Test
 
             // Act
             var response = await client.GetAsync("/api/people");
-            var result = await response.Content.ReadAsStringAsync();
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -90,7 +82,6 @@ namespace MyProject.Test
 
             // Act
             var response = await client.GetAsync("/api/people/1");
-            var result = await response.Content.ReadAsStringAsync();
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -119,7 +110,6 @@ namespace MyProject.Test
 
             // Act
             var response = await client.GetAsync("/api/people/1");
-            var result = await response.Content.ReadAsStringAsync();
 
             // Assert
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);

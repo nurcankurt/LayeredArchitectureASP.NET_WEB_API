@@ -1,12 +1,7 @@
-﻿using Xunit;
-using Moq;
-using MyProject.BusinessLogicLayer;
+﻿using MyProject.BusinessLogicLayer;
 using MyProject.DataAccessLayer.Models;
 using MyProject.DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyProject.Tests
 {
@@ -31,7 +26,7 @@ namespace MyProject.Tests
             var people = new List<Person>
             {
                 new Person { FirstName = "Nurcan", LastName = "Kurt", Email = "nurcan.kurt@test.com" },
-                new Person { FirstName = "Jane", LastName = "Smith", Email = "jane.smith@example.com" }
+                new Person { FirstName = "TestName", LastName = "TestLastName", Email = "example@test.com" }
             };
 
             using (var dbContext = CreateDbContext())
@@ -47,7 +42,7 @@ namespace MyProject.Tests
                 // Assert
                 Assert.Equal(2, result.Count());
                 Assert.Contains(result, p => p.FirstName == "Nurcan" && p.LastName == "Kurt" && p.Email == "nurcan.kurt@test.com");
-                Assert.Contains(result, p => p.FirstName == "Jane" && p.LastName == "Smith" && p.Email == "jane.smith@example.com");
+                Assert.Contains(result, p => p.FirstName == "TestName" && p.LastName == "TestLastName" && p.Email == "example@test.com");
             }
         }
 
@@ -118,7 +113,7 @@ namespace MyProject.Tests
         public async Task UpdatePerson_WithExistingId()
         {
             // Arrange
-            var person = new Person { FirstName = "Test", LastName = "Test", Email = "example@test.com" };
+            var person = new Person { FirstName = "TestName", LastName = "TestLastName", Email = "example@test.com" };
 
             using (var dbContext = CreateDbContext())
             {
