@@ -6,7 +6,6 @@ namespace MyProject.WebApi
     {
         public static void Map(WebApplication app)
         {
-            app.MapGet("/", () => "Hello World!");
 
             app.MapGet("/api/people", async (IPersonService service) =>
             {
@@ -57,11 +56,7 @@ namespace MyProject.WebApi
 
                 if (entity is null)
                 {
-                    return Results.NotFound(new
-                    {
-                        statusCode = StatusCodes.Status404NotFound,
-                        message = $"Person with id:{id} could not be found."
-                    });
+                    return Results.NotFound();
                 }
 
                 await service.DeletePerson(id);
