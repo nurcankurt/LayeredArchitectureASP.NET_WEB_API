@@ -1,8 +1,12 @@
 # LayeredArchitectureASP.NET_WEB_API
- ![image](https://github.com/nurcankurt/LayeredArchitectureASP.NET_WEB_API/assets/112586484/9d80bdac-1a0e-4c7d-8573-e39245128504)
+![image](https://github.com/nurcankurt/LayeredArchitectureASP.NET_WEB_API/assets/112586484/91834d1f-c3c4-4cd9-8394-5e66df245b50)
+
 # Test Results
-![image](https://github.com/nurcankurt/LayeredArchitectureASP.NET_WEB_API/assets/112586484/2c793913-8e1d-4ac4-b09e-d9367309e6cc)
+![image](https://github.com/nurcankurt/LayeredArchitectureASP.NET_WEB_API/assets/112586484/c152f97c-779a-4eef-9e69-5b9435dba2d0)
+
 # Coverage Report
-![image](https://github.com/nurcankurt/LayeredArchitectureASP.NET_WEB_API/assets/112586484/ff7427cb-ea16-4fb3-9f1e-b690288a0c7e)
+![image](https://github.com/nurcankurt/LayeredArchitectureASP.NET_WEB_API/assets/112586484/e782bc58-542a-49d4-a49d-a6fff2f1420b)
+
 # Coverage Summary
-![image](https://github.com/nurcankurt/LayeredArchitectureASP.NET_WEB_API/assets/112586484/d7b97881-78f5-4fc2-821c-41b32f844b4c)
+![image](https://github.com/nurcankurt/LayeredArchitectureASP.NET_WEB_API/assets/112586484/4fb8e567-82b1-4558-8f95-b807b645b70f)
+
